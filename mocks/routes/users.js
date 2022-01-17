@@ -44,18 +44,18 @@ module.exports = [
     url: "/api/users/:id", // url in express format
     method: "GET", // HTTP method
     variants: [
+      // {
+      //   id: "success", // id of the variant
+      //   response: {
+      //     status: 200, // status to send
+      //     body: USERS[0], // body to send
+      //   },
+      // },
       {
         id: "success", // id of the variant
-        response: {
-          status: 200, // status to send
-          body: USERS[0], // body to send
-        },
-      },
-      {
-        id: "real", // id of the variant
         response: (req, res) => {
-          const userId = req.params.id;
-          const user = USERS.find((userData) => userData.id === Number(userId));
+          const produtoId = req.params.id;
+          const user = USERS.find((produto) => produto.id === Number(produtoId));
           if (user) {
             res.status(200);
             res.send(user);

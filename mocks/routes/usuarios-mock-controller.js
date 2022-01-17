@@ -2,29 +2,19 @@
 // For a detailed explanation regarding each routes property, visit:
 // https://mocks-server.org/docs/get-started-routes
 
-// users data
-const USERS = [
-    {
-      id: 1,
-      name: "John Doe",
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-    },
-  ];
+const { USUARIOS } = require("../utils/usuario-mock");
   
   module.exports = [
     {
-      id: "get-users", // id of the route
-      url: "/api/users", // url in express format
+      id: "obter-usuarios", 
+      url: "/api/usuarios", // url in express format
       method: "GET", // HTTP method
       variants: [
         {
           id: "success", // id of the variant
           response: {
             status: 200, // status to send
-            body: USERS, // body to send
+            body: USUARIOS, // body to send
           },
         },
         {
@@ -33,41 +23,36 @@ const USERS = [
             status: 400, // status to send
             body: {
               // body to send
-              message: "Error",
+              message: "Erro ao obter produtos",
             },
           },
         },
       ],
     },
+
     {
-      id: "get-user", // id of the route
-      url: "/api/users/:id", // url in express format
+      id: "obter-usuarios-por-id", // id of the route
+      url: "/api/usuarios/:id", // url in express format
       method: "GET", // HTTP method
       variants: [
         {
           id: "success", // id of the variant
-          response: {
-            status: 200, // status to send
-            body: USERS[0], // body to send
-          },
-        },
-        {
-          id: "real", // id of the variant
           response: (req, res) => {
-            const userId = req.params.id;
-            const user = USERS.find((userData) => userData.id === Number(userId));
-            if (user) {
+            const usuarioId = req.params.id;
+            const usuario = USUARIOS.find((usuario) => usuario.id === Number(usuarioId));
+            if (usuario) {
               res.status(200);
-              res.send(user);
+              res.send(usuario);
             } else {
               res.status(404);
               res.send({
-                message: "User not found",
+                message: "Usuário não encontrado.",
               });
             }
           },
         },
       ],
     },
+
   ];
   

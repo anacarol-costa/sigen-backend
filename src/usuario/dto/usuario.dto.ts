@@ -17,5 +17,5 @@ export class UsuarioDto {
   endereco: EnderecoCompraDto
 
   @ApiProperty()
-  telefone: Number;
+  telefone: String;
 }

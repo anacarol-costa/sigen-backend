@@ -1,7 +1,17 @@
 [
   {
     "id": "base",
-    "routesVariants": ["add-headers:enabled", "get-users:success", "get-user:success"]
+    "routesVariants": [
+      "add-headers:enabled", 
+      "get-users:success",
+      "get-user:success",
+      "obter-produtos:success",
+      "obter-produto-por-id:success",
+      "obter-categorias:success",
+      "obter-categoria-por-id:success",
+      "obter-usuarios:success",
+      "obter-usuarios-por-id:success"
+    ]
   },
   {
     "id": "no-headers",
@@ -11,6 +21,8 @@
   {
     "id": "user-real",
     "from": "no-headers",
-    "routesVariants": ["get-user:real"]
+    "routesVariants": [
+      "get-user:real"
+    ]
   }
 ]
