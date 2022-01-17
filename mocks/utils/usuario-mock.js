@@ -1,6 +1,6 @@
 const { ENDERECOS } = require("./endereco-mock")
 
-const USUARIOS = [
+module.exports = [
   {
     id: 1,
     email: 'nicolas@gmail.com', 
@@ -17,4 +17,4 @@ const USUARIOS = [
   }
 ]
 
-exports.USUARIOS = USUARIOS;
+// exports.USUARIOS = USUARIOS;

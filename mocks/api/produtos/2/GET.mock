@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+
+{
+  "id": 2,
+  "nome": "Bolo de cenoura",
+  "valorBase": 25,
+  "categoria":   {
+    "id": 2,
+    "nome": "Categoria 2"
+  },
+  "unidadeMedida":  {
+    "id": 1,
+    "descricao": "Litros",
+    "abreviacao": "l"
+  },
+  "itensProduto":  {
+    "id": 1,
+    "descricao": "item 1",
+    "opcoes":  {
+      "id": 2,
+      "nome": "Opção 2",
+      "valor": 9.99
+    }
+  }
+}

@@ -10,7 +10,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start-oficial": "nest start",
-    "start": "mocks-server",
+    "start": "node mocks/mockserver.js",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -20,7 +20,6 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "mocks": "mocks-server"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -28,11 +27,11 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
+    "mockserver": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "swagger-ui-express": "^4.2.0",
-    "@mocks-server/main": "^2.6.0"
+    "swagger-ui-express": "^4.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
