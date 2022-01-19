@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ProdutoDto } from './dto/produto.dto';
+import { Produto } from './entities/produto.entity';
 
 
 @Injectable()
 export class ProdutoService {
-  create(createProdutoDto: ProdutoDto) {
-    return 'This action adds a new produto';
+
+
+  constructor(
+    @InjectRepository(Produto)
+    private readonly produtoRepository: Repository<Produto>) {
+
   }
 
-  findAll() {
-    return `This action returns all produto`;
+  async create(createProdutoDto: ProdutoDto): Promise<Produto> {
+    const produto = ProdutoDto.fromEntity(createProdutoDto);
+    return await this.produtoRepository.save(produto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} produto`;
+  async findAll(): Promise<Produto[]>{
+    return await this.produtoRepository.find();
   }
 
-  update(id: number, updateProdutoDto: ProdutoDto) {
-    return `This action updates a #${id} produto`;
+  async findOne(id: number): Promise<Produto> {
+    return await this.produtoRepository.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} produto`;
+  async update(id: number, updateProdutoDto: ProdutoDto): Promise<UpdateResult> {
+    const produto = ProdutoDto.fromEntity(updateProdutoDto);
+    return await this.produtoRepository.update(id, produto);
+  }
+
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.produtoRepository.delete(id);
   }
 }

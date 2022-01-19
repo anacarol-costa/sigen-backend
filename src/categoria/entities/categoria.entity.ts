@@ -5,6 +5,7 @@ export class Categoria {
 
     @PrimaryGeneratedColumn()
     id: Number;
+    
     @Column()
     nome: String;
 

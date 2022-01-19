@@ -10,8 +10,8 @@ export class CategoriaService {
   constructor(
     @InjectRepository(Categoria)
     private readonly categoriaRepository: Repository<Categoria>) {
-
-  }
+    
+    }
 
   async create(createCategoriaDto: CategoriaDto): Promise<Categoria> {
     const categoria = CategoriaDto.fromEntity(createCategoriaDto);
