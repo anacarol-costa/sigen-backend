@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CategoriaDto } from './dto/categoria.dto';
 import { Categoria } from './entities/categoria.entity';
 
@@ -14,7 +14,7 @@ export class CategoriaService {
   }
 
   async create(createCategoriaDto: CategoriaDto): Promise<Categoria> {
-    const categoria = new Categoria(createCategoriaDto.id, createCategoriaDto.nome);
+    const categoria = CategoriaDto.fromEntity(createCategoriaDto);
     return await this.categoriaRepository.save(categoria);
   }
 
@@ -26,11 +26,12 @@ export class CategoriaService {
     return await this.categoriaRepository.findOne(id);;
   }
 
-  update(id: number, updateCategoriaDto: CategoriaDto) {
-    return `This action updates a #${id} categoria`;
+  async update(id: number, updateCategoriaDto: CategoriaDto): Promise<UpdateResult> {
+    const categoria = CategoriaDto.fromEntity(updateCategoriaDto);
+    return await this.categoriaRepository.update(id, categoria);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} categoria`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.categoriaRepository.delete(id);
   }
 }
