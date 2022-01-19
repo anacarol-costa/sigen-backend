@@ -7,6 +7,7 @@ import { CompraModule } from './compra/compra.module';
 import { AdministradorModule } from './administrador/administrador.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/usuario.module';
+import { UnidadeMedidaModule } from './unidade-medida/unidade-medida.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -15,7 +16,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     synchronize: true,
     logging: false,
     entities: ["dist/**/*.entity.js"],
-  }),ProdutoModule, UsuarioModule, CategoriaModule, CompraModule, AdministradorModule],
+  }),ProdutoModule, UsuarioModule, CategoriaModule, CompraModule, AdministradorModule, UnidadeMedidaModule],
   controllers: [AppController],
   providers: [AppService],
 })
