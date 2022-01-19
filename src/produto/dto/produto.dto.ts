@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { CategoriaDto } from "./categoria.dto";
+import { CategoriaDto } from "src/categoria/dto/categoria.dto";
 import { ItensProdutoDto } from "./itens-produto.dto";
 import { UnidadeMedidaDto } from "./unidade-medida.dto";
 

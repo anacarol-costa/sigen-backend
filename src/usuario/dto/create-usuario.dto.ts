@@ -11,7 +11,7 @@ export class UsuarioDto {
   email: String; 
 
   @ApiProperty()
-  senha: String; //TODO verificar
+  senha: String; 
 
   @ApiProperty()
   endereco: EnderecoCompraDto

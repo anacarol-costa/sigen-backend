@@ -1,8 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { EnderecoCompraDto } from "../../usuario/dto/endereco-compra.dto";
-
+import { EnderecoCompraDto } from "src/usuario/dto/endereco-compra.dto";
 import { ProdutoDto } from "src/produto/dto/produto.dto";
-import { UsuarioDto } from "src/usuario/dto/usuario.dto";
+import { UsuarioDto } from "src/usuario/dto/create-usuario.dto";
 
 export class CompraDto {
   
