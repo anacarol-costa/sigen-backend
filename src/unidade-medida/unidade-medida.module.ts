@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UnidadeMedida } from './entities/unidade-medida.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature(UnidadeMedida)],
+  imports:[TypeOrmModule.forFeature([UnidadeMedida])],
   controllers: [UnidadeMedidaController],
-  providers: [UnidadeMedidaService]
+  providers: [UnidadeMedidaService],
+  exports: [UnidadeMedidaService],
 })
 export class UnidadeMedidaModule {}

@@ -15,11 +15,11 @@ export class Produto {
     valorBase: Number;
     
     @ManyToOne(() => Categoria, categoria => categoria.id)
-    @JoinColumn({ name: 'id' })
+    @JoinColumn({ name: 'id_categoria' })
     categoria: Categoria;
   
     @ManyToOne(() => UnidadeMedida, unidadeMedida => unidadeMedida.id)
-    @JoinColumn({ name: 'id' })
+    @JoinColumn({ name: 'id_unidade_medida' })
     unidadeMedida: UnidadeMedida;
 
     constructor(id: Number, nome: String, valorBase: Number, categoria: Categoria, unidadeMedida: UnidadeMedida) {

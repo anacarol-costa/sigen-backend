@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UnidadeMedidaDto } from 'src/produto/dto/unidade-medida.dto';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { UnidadeMedidaDto } from './dto/unidade-medida.dto';
 import { UnidadeMedida } from './entities/unidade-medida.entity';
 
 @Injectable()
