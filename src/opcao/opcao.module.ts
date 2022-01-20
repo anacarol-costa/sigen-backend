@@ -4,10 +4,9 @@ import { OpcaoController } from './opcao.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Opcao } from './entities/opcao.entity';
 import { Item } from './entities/item.entity';
-import { SubOpcao } from './entities/sub-opcao.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Opcao, Item, SubOpcao])],
+  imports: [TypeOrmModule.forFeature([Opcao, Item])],
   controllers: [OpcaoController],
   providers: [OpcaoService]
 })

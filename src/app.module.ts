@@ -13,7 +13,7 @@ import { OpcaoModule } from './opcao/opcao.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'sqlite',
-    database: 'database.db',
+    database: 'data_base.db',
     synchronize: true,
     logging: false,
     entities: ["dist/**/*.entity.js"],
