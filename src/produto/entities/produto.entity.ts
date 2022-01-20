@@ -14,11 +14,11 @@ export class Produto {
     @Column()
     valorBase: Number;
     
-    @ManyToOne(() => Categoria, categoria => categoria.id)
+    @ManyToOne(() => Categoria, categoria => categoria.id, { eager: true })
     @JoinColumn({ name: 'id_categoria' })
     categoria: Categoria;
   
-    @ManyToOne(() => UnidadeMedida, unidadeMedida => unidadeMedida.id)
+    @ManyToOne(() => UnidadeMedida, unidadeMedida => unidadeMedida.id, { eager: true })
     @JoinColumn({ name: 'id_unidade_medida' })
     unidadeMedida: UnidadeMedida;
 
