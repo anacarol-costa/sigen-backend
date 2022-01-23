@@ -20,7 +20,7 @@ export class ProdutoDto {
   @ApiProperty()
   unidadeMedidaId: number;
 
-  @ApiProperty()
+  @ApiProperty({ type: [ItensProdutoDto] })
   itensProduto: Array<ItensProdutoDto>;
 
 

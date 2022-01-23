@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProdutoService } from './produto.service';
 import { ProdutoDto } from './dto/produto.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Produto } from './entities/produto.entity';
 
 
 @ApiTags('Produto')
@@ -15,7 +14,7 @@ export class ProdutoController {
   @ApiResponse({
     status: 201,
     description: 'Produto criado.',
-    type: Produto,
+    type: ProdutoDto,
   })
   create(@Body() createProdutoDto: ProdutoDto) {
     return this.produtoService.create(createProdutoDto);
@@ -26,7 +25,7 @@ export class ProdutoController {
   @ApiResponse({
     status: 200,
     description: 'Lista de produtos.',
-    type: Produto,
+    type: [ProdutoDto],
   })
   findAll() {
     return this.produtoService.findAll();
@@ -37,7 +36,11 @@ export class ProdutoController {
   @ApiResponse({
     status: 200,
     description: 'Produto encontrado.',
-    type: Produto,
+    type: ProdutoDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produto não econtrado.',
   })
   findOne(@Param('id') id: string) {
     return this.produtoService.findOne(+id);
@@ -49,6 +52,10 @@ export class ProdutoController {
     status: 204,
     description: 'Produto ataualizado.'
   })
+  @ApiResponse({
+    status: 404,
+    description: 'Produto não econtrado.'
+  })
   update(@Param('id') id: string, @Body() updateProdutoDto: ProdutoDto) {
     return this.produtoService.update(+id, updateProdutoDto);
   }
@@ -58,6 +65,10 @@ export class ProdutoController {
   @ApiResponse({
     status: 204,
     description: 'Produto deletado.'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produto não econtrado.'
   })
   remove(@Param('id') id: string) {
     return this.produtoService.remove(+id);

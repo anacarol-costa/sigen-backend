@@ -1,17 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class ItensProdutoDto {
-
-  @ApiProperty()
-  id: Number;
-
-  @ApiProperty()
-  descricao: String;
-
-  @ApiProperty()
-  opcoes: Array<OpcaoDto>;
-}
-
 class OpcaoDto {
   @ApiProperty()
   id: Number;
@@ -21,4 +9,16 @@ class OpcaoDto {
   
   @ApiProperty()
   valor: Number;
+}
+
+export class ItensProdutoDto {
+
+  @ApiProperty()
+  id: Number;
+
+  @ApiProperty()
+  descricao: String;
+
+  @ApiProperty({ type: [OpcaoDto] })
+  opcoes: Array<OpcaoDto>;
 }

@@ -4,6 +4,7 @@ import { EnderecoCompraDto } from "./endereco-compra.dto";
 
 
 export class UsuarioDto {
+  
   @ApiProperty()
   id: Number;
 
