@@ -28,12 +28,18 @@ export class Produto {
     itensProduto: ItemProduto[];
 
 
-    constructor(id: Number, nome: String, valorBase: Number, categoria: Categoria, unidadeMedida: UnidadeMedida) {
+    constructor(id: Number,
+        nome: String,
+        valorBase: Number,
+        categoria: Categoria,
+        unidadeMedida: UnidadeMedida, 
+        itensProduto?: ItemProduto[]) {
         this.id = id;
         this.nome = nome;
         this.valorBase = valorBase;
         this.categoria = categoria;
         this.unidadeMedida = unidadeMedida;
+        this.itensProduto = itensProduto;
     }
 
 }
