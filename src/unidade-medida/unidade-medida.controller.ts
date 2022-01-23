@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { UnidadeMedidaDto } from './dto/unidade-medida.dto';
 import { UnidadeMedidaService } from './unidade-medida.service';
 
-@Controller('unidade-medida')
+@ApiTags('Unidade Medida')
+@Controller('unidades-medida')
 export class UnidadeMedidaController {
   constructor(private readonly unidadeMedidaService: UnidadeMedidaService) {}
 

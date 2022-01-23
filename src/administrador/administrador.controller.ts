@@ -1,8 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AdministradorService } from './administrador.service';
 import { AdministradorDto } from './dto/administrador.dto';
 
-@Controller('administrador')
+
+@ApiTags('Administrador')
+@Controller('administradores')
 export class AdministradorController {
   constructor(private readonly administradorService: AdministradorService) {}
 

@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { OpcaoDto } from './dto/opcao.dto';
 import { OpcaoService } from './opcao.service';
 
-@Controller('opcao')
+@ApiTags('Opção')
+@Controller('opcoes')
 export class OpcaoController {
   constructor(private readonly opcaoService: OpcaoService) {}
 
