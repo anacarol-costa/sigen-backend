@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AdministradorService } from './administrador.service';
 import { AdministradorDto } from './dto/administrador.dto';
 
@@ -10,26 +10,66 @@ export class AdministradorController {
   constructor(private readonly administradorService: AdministradorService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Criar administrador.'})
+  @ApiResponse({
+    status: 201,
+    description: 'Administrador criado.',
+    type: AdministradorDto,
+  })
   create(@Body() createAdministradorDto: AdministradorDto) {
     return this.administradorService.create(createAdministradorDto);
   }
 
+  @ApiOperation({ summary: 'Listar todos os administradores.'})
+  @ApiResponse({
+    status: 200,
+    description: 'Listar administradores.',
+    type: [AdministradorDto],
+  })
   @Get()
   findAll() {
     return this.administradorService.findAll();
   }
 
-  @Get(':id')
+  @Get(':id')  
+  @ApiOperation({ summary: 'Obter administrador por id.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Administrador encontrado.',
+    type: AdministradorDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Administrador não encontrado.',
+  })
   findOne(@Param('id') id: string) {
     return this.administradorService.findOne(+id);
   }
 
   @Patch(':id')
+  @ApiOperation({ summary: 'Alterar administrador.' })
+  @ApiResponse({
+    status: 204,
+    description: 'Administrador atualizado.'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Administador não encontrado.'
+  })
   update(@Param('id') id: string, @Body() updateAdministradorDto: AdministradorDto) {
     return this.administradorService.update(+id, updateAdministradorDto);
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Deletar administrador.' })
+  @ApiResponse({
+    status: 204,
+    description: 'Administrador deletado.'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Administrador não encontrado.'
+  })
   remove(@Param('id') id: string) {
     return this.administradorService.remove(+id);
   }
