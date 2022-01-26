@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Usuario } from "../entities/usuario.entity";
 import { EnderecoCompraDto } from "./endereco-compra.dto";
-
 
 
 export class UsuarioDto {
@@ -19,4 +19,15 @@ export class UsuarioDto {
 
   @ApiProperty()
   telefone: String;
+
+
+  static fromEntity(dto: UsuarioDto, endereco: EnderecoCompraDto): Usuario {
+    return new Usuario(
+      dto.id,
+      dto.email,
+      dto.senha,
+      endereco,
+      dto.telefone
+    )
+  }
 }
