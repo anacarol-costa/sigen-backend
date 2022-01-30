@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { EnderecoCompraDto } from "../dto/endereco-compra.dto";
+import { EnderecoCompra } from "./endereco-compra.entity";
 
 @Entity()
 export class Usuario {
@@ -13,9 +13,9 @@ export class Usuario {
   @Column()
   senha: String; 
 
-  @OneToMany(() => EnderecoCompraDto, enderecoCompraDto => enderecoCompraDto.id, { eager: true})
+  @OneToMany(() => EnderecoCompra, EnderecoCompra => EnderecoCompra.id, { eager: true})
   @JoinColumn({ name: 'id_endereco'})
-  endereco: EnderecoCompraDto;
+  endereco: EnderecoCompra;
 
   @Column()
   telefone: String;
@@ -24,12 +24,12 @@ export class Usuario {
   constructor(id: Number,
     email: String,
     senha: String,
-    enderecoCompraDto: EnderecoCompraDto,
+    enderecoCompra: EnderecoCompra,
     telefone: String) {
       this.id = id;
       this.email = email;
       this.senha = senha;
-      this.endereco = enderecoCompraDto;
+      this.endereco = enderecoCompra;
       this.telefone = telefone;
     }
 }
