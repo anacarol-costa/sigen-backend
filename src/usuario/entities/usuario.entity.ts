@@ -8,6 +8,9 @@ export class Usuario {
   id: Number;
 
   @Column()
+  nome: String;
+
+  @Column()
   email: String; 
 
   @Column()
@@ -22,11 +25,13 @@ export class Usuario {
 
 
   constructor(id: Number,
+    nome: String,
     email: String,
     senha: String,
     enderecoCompra: EnderecoCompra,
     telefone: String) {
       this.id = id;
+      this.nome = nome;
       this.email = email;
       this.senha = senha;
       this.endereco = enderecoCompra;

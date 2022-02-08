@@ -9,6 +9,9 @@ export class UsuarioDto {
   id: Number;
 
   @ApiProperty()
+  nome: string;
+
+  @ApiProperty()
   email: String; 
 
   @ApiProperty()
@@ -24,6 +27,7 @@ export class UsuarioDto {
   static fromEntity(dto: UsuarioDto, endereco: EnderecoCompraDto): Usuario {
     return new Usuario(
       dto.id,
+      dto.nome,
       dto.email,
       dto.senha,
       endereco,
