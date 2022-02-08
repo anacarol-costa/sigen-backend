@@ -7,6 +7,9 @@ export class Administrador {
   id: Number;
 
   @Column()
+  nome: String;
+
+  @Column()
   email: String;
 
   @Column()
@@ -16,10 +19,12 @@ export class Administrador {
   telefone: String;
 
   constructor(id: Number,
+    nome: String,
     email: String,
     senha: String,
     telefone: String){
       this.id = id;
+      this.nome = nome;
       this.email = email;
       this.senha = senha;
       this.telefone = telefone;

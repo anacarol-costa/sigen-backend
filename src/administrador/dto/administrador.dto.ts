@@ -6,6 +6,9 @@ export class AdministradorDto {
   id: Number;
 
   @ApiProperty()
+  nome: String;
+
+  @ApiProperty()
   email: String;
 
   @ApiProperty()
@@ -17,6 +20,7 @@ export class AdministradorDto {
   static fromEntity(dto: AdministradorDto): Administrador {
     return new Administrador(
       dto.id,
+      dto.nome,
       dto.email,
       dto.senha,
       dto.telefone
