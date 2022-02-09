@@ -1,10 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { EnderecoCompra } from "../entities/endereco-compra.entity";
+import { Endereco } from "../entities/endereco.entity";
 
 
 
 
-export class EnderecoCompraDto {
+export class EnderecoDto {
   @ApiProperty()
   id: Number;
 
@@ -23,8 +23,8 @@ export class EnderecoCompraDto {
   @ApiProperty()
   quadra: Number;
 
-  static fromEntity(dto: EnderecoCompraDto): EnderecoCompra {
-    return new EnderecoCompra(
+  static fromEntity(dto: EnderecoDto): Endereco {
+    return new Endereco(
       dto.id,
       dto.cep,
       dto.bairro,

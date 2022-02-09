@@ -35,6 +35,10 @@ export class ProdutoService {
     return await this.produtoRepository.findOne(id);
   }
 
+  async findByIds(ids: number[]): Promise<Produto[]> {
+    return await this.produtoRepository.findByIds(ids);
+  }
+
   async update(id: number, produtoDto: ProdutoDto): Promise<UpdateResult> {
     const { categoria, unidadeMedida } = await this.obterEntitysAuxiliares(produtoDto);
 

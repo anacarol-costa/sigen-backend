@@ -1,25 +1,57 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ProdutoService } from 'src/produto/produto.service';
+import { EnderecoService } from 'src/usuario/endereco.service';
+import { UsuarioService } from 'src/usuario/usuario.service';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CompraDto } from './dto/compra.dto';
+import { Compra } from './entities/compra.entity';
 
 @Injectable()
 export class CompraService {
-  create(createCompraDto: CompraDto) {
-    return 'This action adds a new compra';
+
+  constructor(
+    @InjectRepository(Compra) private readonly compraRepository: Repository<Compra>,
+    private readonly usuarioService: UsuarioService,
+    private readonly produtoService: ProdutoService,
+    private readonly enderecoService: EnderecoService
+  ){
+
   }
 
-  findAll() {
-    return `This action returns all compra`;
+  async create(compraDto: CompraDto): Promise<Compra> {
+    const { enderecoCompra, usuario, produtos} = await this.obterEntitysAuxiliares(compraDto);
+
+    const compra = CompraDto.fromEntity(compraDto, enderecoCompra, usuario, produtos,);
+
+    return await this.compraRepository.save(compra);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} compra`;
+  async findAll(): Promise<Compra[]>{
+    return await this.compraRepository.find();
   }
 
-  update(id: number, updateCompraDto: CompraDto) {
-    return `This action updates a #${id} compra`;
+  async findOne(id: number): Promise<Compra>  {
+    return await this.compraRepository.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} compra`;
+  async update(id: number, compraDto: CompraDto): Promise<UpdateResult> {
+    const { enderecoCompra, usuario, produtos} = await this.obterEntitysAuxiliares(compraDto);
+    
+    const compra = CompraDto.fromEntity(compraDto, enderecoCompra, usuario, produtos);
+
+    return await this.compraRepository.update(id, compra);
+  }
+
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.compraRepository.delete(id);
+  }
+
+  private async obterEntitysAuxiliares(dto: CompraDto) {
+    const enderecoCompra = await this.enderecoService.findOne(dto.enderecoCompraId);
+    const usuario = await this.usuarioService.findOne(dto.usuarioId);
+    const produtos = await this.produtoService.findByIds(dto.produtosId)
+  
+    return{ enderecoCompra, usuario, produtos };
   }
 }

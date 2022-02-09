@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
-export class EnderecoCompra {
+export class Endereco {
 
   @PrimaryGeneratedColumn()
   id: Number;

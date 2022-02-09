@@ -1,19 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UsuarioDto } from './dto/usuario.dto';
-import { Usuario } from './entities/usuario.entity';
+import { EnderecoDto } from './dto/endereco.dto';
+import { Endereco } from './entities/endereco.entity';
 
 @Injectable()
-export class UsuarioService {
+export class EnderecoService {
 
   constructor(
-    @InjectRepository(Usuario) private readonly usuarioRepository: Repository<Usuario> 
-  ) {
+    @InjectRepository(Endereco)private readonly enderecoRepository: Repository<Endereco>
+    ) {
+    }
 
-  }
 
-  create(usuarioDto: UsuarioDto) {
+
+  create(enderecoDto: EnderecoDto) {
     return 'This action adds a new usuario';
   }
 
@@ -22,10 +23,10 @@ export class UsuarioService {
   }
 
   async findOne(id: number) {
-    return await this.usuarioRepository.findOne(id);
+    return await this.enderecoRepository.findOne(id);
   }
 
-  update(id: number, usuarioDto: UsuarioDto) {
+  update(id: number, enderecoDto: EnderecoDto) {
     return `This action updates a #${id} usuario`;
   }
 
