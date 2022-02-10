@@ -1,34 +1,33 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
 export class Endereco {
 
   @PrimaryGeneratedColumn()
-  id: Number;
+  id: number;
 
   @Column()
-  cep: Number;
+  cep: number;
 
   @Column()
-  bairro: String;
+  bairro: string;
 
   @Column()
-  complemento: String;
+  complemento: string;
 
   @Column()
-  pontoReferencia: String;
+  pontoReferencia: string;
 
   @Column()
-  quadra: Number;
+  quadra: number;
 
-
-  constructor(id: Number,
-    cep: Number,
-    bairro: String,
-    complemento: String,
+  constructor(id: number,
+    cep: number,
+    bairro: string,
+    complemento: string,
     pontoReferencia: string,
-    quadra: Number) {
+    quadra: number) {
       this.id = id;
       this.cep = cep;
       this.bairro = bairro;

@@ -6,22 +6,22 @@ import { Endereco } from "../entities/endereco.entity";
 
 export class EnderecoDto {
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @ApiProperty()
-  cep: Number;
+  cep: number;
 
   @ApiProperty()
-  bairro: String;
+  bairro: string;
 
   @ApiProperty()
-  complemento: String;
+  complemento: string;
 
   @ApiProperty()
   pontoReferencia: string;
 
   @ApiProperty()
-  quadra: Number;
+  quadra: number;
 
   static fromEntity(dto: EnderecoDto): Endereco {
     return new Endereco(

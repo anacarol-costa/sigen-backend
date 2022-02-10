@@ -1,4 +1,5 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { type } from "os";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Endereco } from "./endereco.entity";
 
 @Entity()
@@ -16,9 +17,9 @@ export class Usuario {
   @Column()
   senha: String; 
 
-  @OneToMany(() => Endereco, Endereco => Endereco.id, { eager: true})
+  @ManyToOne(() => Endereco, endereco => endereco.id, { eager: true })
   @JoinColumn({ name: 'id_endereco'})
-  enderecos: Endereco[];
+  enderecos: Endereco;  
 
   @Column()
   telefone: String;
@@ -28,7 +29,7 @@ export class Usuario {
     nome: String,
     email: String,
     senha: String,
-    endereco: Endereco[],
+    endereco: Endereco,
     telefone: String) {
       this.id = id;
       this.nome = nome;

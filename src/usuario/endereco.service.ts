@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { EnderecoDto } from './dto/endereco.dto';
 import { Endereco } from './entities/endereco.entity';
 
@@ -14,12 +14,14 @@ export class EnderecoService {
 
 
 
-  create(enderecoDto: EnderecoDto) {
-    return 'This action adds a new usuario';
+  async create(enderecoDto: EnderecoDto): Promise<Endereco> {
+    const endereco = EnderecoDto.fromEntity(enderecoDto);
+
+    return await this.enderecoRepository.save(endereco);
   }
 
-  findAll() {
-    return `This action returns all usuario`;
+  async findAll(): Promise<Endereco[]> {
+    return await this.enderecoRepository.find(); 
   }
 
   async findByIds(ids: number[]){
@@ -30,11 +32,13 @@ export class EnderecoService {
     return await this.enderecoRepository.findOne(id);
   }
 
-  update(id: number, enderecoDto: EnderecoDto) {
-    return `This action updates a #${id} usuario`;
+  async update(id: number, enderecoDto: EnderecoDto): Promise<UpdateResult> {
+    const endereco = EnderecoDto.fromEntity(enderecoDto);
+
+    return await this.enderecoRepository.update(id, endereco); 
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.enderecoRepository.delete(id);
   }
 }

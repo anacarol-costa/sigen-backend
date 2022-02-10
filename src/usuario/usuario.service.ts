@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { UsuarioDto } from './dto/usuario.dto';
 import { EnderecoService } from './endereco.service';
 import { Usuario } from './entities/usuario.entity';
@@ -23,24 +23,28 @@ export class UsuarioService {
     return await this.usuarioRepository.save(usuario);
   }
 
-  findAll() {
-    return `This action returns all usuario`;
+  async findAll(): Promise<Usuario[]> {
+    return await this.usuarioRepository.find();
   }
 
   async findOne(id: number) {
     return await this.usuarioRepository.findOne(id);
   }
 
-  update(id: number, usuarioDto: UsuarioDto) {
-    return `This action updates a #${id} usuario`;
+  async update(id: number, usuarioDto: UsuarioDto): Promise<UpdateResult> {
+    const endereco = await this.obterEntitysAuxiliares(usuarioDto);
+
+    const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
+    
+    return await this.usuarioRepository.update(id, usuario);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.usuarioRepository.delete(id);
   }
 
   private async obterEntitysAuxiliares(dto:UsuarioDto) {
-    const endereco = await this.enderecoService.findByIds(dto.enderecoIds);
+    const endereco = await this.enderecoService.findOne(dto.enderecoIds);
 
     return endereco;
   } 

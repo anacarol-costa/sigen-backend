@@ -19,13 +19,13 @@ export class UsuarioDto {
   senha: String; 
 
   @ApiProperty()
-  enderecoIds: number[]; //EnderecoDto[]
+  enderecoIds: number; //EnderecoDto[]
 
   @ApiProperty()
   telefone: String;
 
 
-  static fromEntity(dto: UsuarioDto, endereco: Endereco[]): Usuario {
+  static fromEntity(dto: UsuarioDto, endereco: Endereco): Usuario {
     return new Usuario(
       dto.id,
       dto.nome,

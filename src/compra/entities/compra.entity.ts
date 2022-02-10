@@ -28,7 +28,7 @@ export class Compra {
     valorCompra: Number,
     enderecoCompra: Endereco,
     usuario: Usuario,
-    produtos?: Produto[]) {
+    produtos: Produto[]) {
       this.id = id;
       this.valorCompra = valorCompra;
       this.enderecoCompra = enderecoCompra;
