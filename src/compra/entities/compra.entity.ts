@@ -1,7 +1,7 @@
 import { Produto } from "src/produto/entities/produto.entity";
 import { Endereco } from "src/usuario/entities/endereco.entity";
 import { Usuario } from "src/usuario/entities/usuario.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Compra {
@@ -20,8 +20,8 @@ export class Compra {
   @JoinColumn({ name:'id_usuario'})
   usuario: Usuario;
 
-  @OneToMany(() => Produto, produto => produto.id, { eager:true})
-  @JoinColumn({ name:'id_produto'})
+  @ManyToMany(() => Produto)
+  @JoinTable({name: "compra_produto"})
   produtos: Produto[];
 
   constructor(id: Number,

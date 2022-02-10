@@ -22,6 +22,10 @@ export class EnderecoService {
     return `This action returns all usuario`;
   }
 
+  async findByIds(ids: number[]){
+    return await this.enderecoRepository.findByIds(ids);
+  }
+
   async findOne(id: number) {
     return await this.enderecoRepository.findOne(id);
   }

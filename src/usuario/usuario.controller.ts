@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioDto } from './dto/usuario.dto';
+import { Usuario } from './entities/usuario.entity';
 import { UsuarioService } from './usuario.service';
 
 
@@ -16,7 +17,7 @@ export class UsuarioController {
     description: 'Usuário criado.',
     type: UsuarioDto,
   })  
-  create(@Body() usuarioDto: UsuarioDto): string {
+  create(@Body() usuarioDto: UsuarioDto): Promise<Usuario> {
     return this.usuarioService.create(usuarioDto);
   }
 

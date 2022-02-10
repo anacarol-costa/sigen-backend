@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsuarioDto } from './dto/usuario.dto';
+import { EnderecoService } from './endereco.service';
 import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
@@ -9,12 +10,17 @@ export class UsuarioService {
 
   constructor(
     @InjectRepository(Usuario) private readonly usuarioRepository: Repository<Usuario>, 
-  ) {
+    private readonly enderecoService: EnderecoService
+    ) {
 
   }
 
-  create(usuarioDto: UsuarioDto) {
-    return 'This action adds a new usuario';
+  async create(usuarioDto: UsuarioDto): Promise<Usuario> {
+    const endereco = await this.obterEntitysAuxiliares(usuarioDto);
+
+    const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
+
+    return await this.usuarioRepository.save(usuario);
   }
 
   findAll() {
@@ -32,4 +38,10 @@ export class UsuarioService {
   remove(id: number) {
     return `This action removes a #${id} usuario`;
   }
+
+  private async obterEntitysAuxiliares(dto:UsuarioDto) {
+    const endereco = await this.enderecoService.findByIds(dto.enderecoIds);
+
+    return endereco;
+  } 
 }
