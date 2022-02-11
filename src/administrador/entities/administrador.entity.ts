@@ -4,25 +4,25 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Administrador {
   
   @PrimaryGeneratedColumn()
-  id: Number;
+  id: number;
 
   @Column()
-  nome: String;
+  nome: string;
 
   @Column()
-  email: String;
+  email: string;
 
   @Column()
-  senha: String;
+  senha: string;
 
   @Column()
-  telefone: String;
+  telefone: string;
 
-  constructor(id: Number,
-    nome: String,
-    email: String,
-    senha: String,
-    telefone: String){
+  constructor(id: number,
+    nome: string,
+    email: string,
+    senha: string,
+    telefone: string){
       this.id = id;
       this.nome = nome;
       this.email = email;

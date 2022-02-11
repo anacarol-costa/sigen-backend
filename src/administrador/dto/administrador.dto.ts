@@ -3,19 +3,19 @@ import { Administrador } from "../entities/administrador.entity";
 
 export class AdministradorDto {
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @ApiProperty()
-  nome: String;
+  nome: string;
 
   @ApiProperty()
-  email: String;
+  email: string;
 
   @ApiProperty()
-  senha: String;
+  senha: string;
 
   @ApiProperty()
-  telefone: String;
+  telefone: string;
 
   static fromEntity(dto: AdministradorDto): Administrador {
     return new Administrador(

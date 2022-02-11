@@ -15,6 +15,7 @@ export class CategoriaService {
 
   async create(createCategoriaDto: CategoriaDto): Promise<Categoria> {
     const categoria = CategoriaDto.fromEntity(createCategoriaDto);
+
     return await this.categoriaRepository.save(categoria);
   }
 
@@ -23,11 +24,12 @@ export class CategoriaService {
   }
 
   async findOne(id: number): Promise<Categoria> {
-    return await this.categoriaRepository.findOne(id);;
+    return await this.categoriaRepository.findOne(id);
   }
 
   async update(id: number, updateCategoriaDto: CategoriaDto): Promise<UpdateResult> {
     const categoria = CategoriaDto.fromEntity(updateCategoriaDto);
+    
     return await this.categoriaRepository.update(id, categoria);
   }
 
