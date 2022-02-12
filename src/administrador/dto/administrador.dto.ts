@@ -3,7 +3,7 @@ import { Administrador } from "../entities/administrador.entity";
 
 export class AdministradorDto {
   @ApiProperty()
-  id_administrador: number;
+  id: number;
 
   @ApiProperty()
   nome: string;
@@ -19,7 +19,7 @@ export class AdministradorDto {
 
   static fromEntity(dto: AdministradorDto): Administrador {
     return new Administrador(
-      dto.id_administrador,
+      dto.id,
       dto.nome,
       dto.email,
       dto.senha,

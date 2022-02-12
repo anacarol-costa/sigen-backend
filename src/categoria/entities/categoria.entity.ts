@@ -4,13 +4,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Categoria {
 
     @PrimaryGeneratedColumn()
-    id: Number;
+    id: number;
     
     @Column()
-    nome: String;
+    nome: string;
 
 
-    constructor(id: Number, nome: String) {
+    constructor(id: number, 
+        nome: string) {
         this.id = id;
         this.nome = nome
     }

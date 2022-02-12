@@ -35,12 +35,16 @@ export class CompraService {
     return await this.compraRepository.findOne(id);
   }
 
-  async update(id: number, compraDto: CompraDto): Promise<UpdateResult> {
+  async update(id: number, compraDto: CompraDto): Promise<Compra> {
+    let compra = await this.compraRepository.findOne(id)
     const { enderecoCompra, usuario, produtos} = await this.obterEntitysAuxiliares(compraDto);
     
-    const compra = CompraDto.fromEntity(compraDto, enderecoCompra, usuario, produtos);
+    compra.produtos = produtos;
+    compra.usuario = usuario;
+    compra.enderecoCompra = enderecoCompra;
+    compra.valorCompra = compraDto.valorCompra;
 
-    return await this.compraRepository.update(id, compra);
+    return await this.compraRepository.save(compra);
   }
 
   async remove(id: number): Promise<DeleteResult> {

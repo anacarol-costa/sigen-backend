@@ -4,14 +4,14 @@ import { Categoria } from "../entities/categoria.entity";
 export class CategoriaDto {
   
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @ApiProperty()
-  nome: String;
+  nome: string;
 
 
   static fromEntity(dto: CategoriaDto): Categoria {
-    return new Categoria(dto.id, dto.nome);
+    return new Categoria(dto.id,dto.nome);
   }
 
 }
