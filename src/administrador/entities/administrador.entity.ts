@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Administrador {
   
   @PrimaryGeneratedColumn()
-  id: number;
+  id_administrador: number;
 
   @Column()
   nome: string;
@@ -23,7 +23,7 @@ export class Administrador {
     email: string,
     senha: string,
     telefone: string){
-      this.id = id;
+      this.id_administrador = id;
       this.nome = nome;
       this.email = email;
       this.senha = senha;
