@@ -8,7 +8,7 @@ import { UsuarioService } from './usuario.service';
 @ApiTags('Usuário')
 @Controller('usuarios')
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+  constructor(private readonly usuarioService: UsuarioService) { }
 
   @Post()
   @ApiOperation({ summary: 'Criar usuário.' })
@@ -16,7 +16,7 @@ export class UsuarioController {
     status: 201,
     description: 'Usuário criado.',
     type: UsuarioDto,
-  })  
+  })
   create(@Body() usuarioDto: UsuarioDto): Promise<Usuario> {
     return this.usuarioService.create(usuarioDto);
   }

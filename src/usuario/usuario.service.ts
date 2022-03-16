@@ -9,9 +9,9 @@ import { Usuario } from './entities/usuario.entity';
 export class UsuarioService {
 
   constructor(
-    @InjectRepository(Usuario) private readonly usuarioRepository: Repository<Usuario>, 
+    @InjectRepository(Usuario) private readonly usuarioRepository: Repository<Usuario>,
     private readonly enderecoService: EnderecoService
-    ) {
+  ) {
 
   }
 
@@ -31,11 +31,16 @@ export class UsuarioService {
     return await this.usuarioRepository.findOne(id);
   }
 
+
+  // async findOne(username: string): Promise<Usuario | undefined> {
+  //   return this.users.find(usuario => usuario.username === username)
+  // }
+
   async update(id: number, usuarioDto: UsuarioDto): Promise<UpdateResult> {
     const endereco = await this.obterEntitysAuxiliares(usuarioDto);
 
     const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
-    
+
     return await this.usuarioRepository.update(id, usuario);
   }
 
@@ -43,9 +48,9 @@ export class UsuarioService {
     return await this.usuarioRepository.delete(id);
   }
 
-  private async obterEntitysAuxiliares(dto:UsuarioDto) {
+  private async obterEntitysAuxiliares(dto: UsuarioDto) {
     const endereco = await this.enderecoService.findOne(dto.enderecoIds);
 
     return endereco;
-  } 
+  }
 }
