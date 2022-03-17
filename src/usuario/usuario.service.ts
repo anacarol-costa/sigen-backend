@@ -20,6 +20,12 @@ export class UsuarioService {
 
     const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
 
+    //const email
+
+
+
+
+
     return await this.usuarioRepository.save(usuario);
   }
 
@@ -32,9 +38,12 @@ export class UsuarioService {
   }
 
 
-  // async findOne(username: string): Promise<Usuario | undefined> {
-  //   return this.users.find(usuario => usuario.username === username)
-  // }
+  async findByEmail(email: string): Promise<Usuario> {
+    return this.usuarioRepository
+      .createQueryBuilder("usuario")
+      .where("usuario.email = :email", { email })
+      .getOne();
+  }
 
   async update(id: number, usuarioDto: UsuarioDto): Promise<UpdateResult> {
     const endereco = await this.obterEntitysAuxiliares(usuarioDto);
@@ -50,6 +59,7 @@ export class UsuarioService {
 
   private async obterEntitysAuxiliares(dto: UsuarioDto) {
     const endereco = await this.enderecoService.findOne(dto.enderecoIds);
+
 
     return endereco;
   }

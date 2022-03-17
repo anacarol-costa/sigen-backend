@@ -1,24 +1,14 @@
-import { Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { ApiExcludeController } from '@nestjs/swagger';
-import { AppService } from './app.service';
+import { Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { AuthService } from './auth/auth.service';
+import { LocalAuthGuard } from './auth/local-auth.guard';
 
-@ApiExcludeController()
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private authService: AuthService) { }
 
-  @Get()
-  redirect(@Res() res) {
-    return res.redirect('/api');
-  }
-
-  //Controller
-  @UseGuards(AuthGuard('local'))
-
-  //Route Handler
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 }
