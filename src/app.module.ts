@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ProdutoModule } from './produto/produto.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { CompraModule } from './compra/compra.module';
@@ -20,9 +19,18 @@ import { ConfigModule } from '@nestjs/config';
       database: 'data_base.db',
       synchronize: true,
       logging: false,
-      entities: ["dist/**/*.entity.js"],
-    }), ProdutoModule, UsuarioModule, CategoriaModule, CompraModule, AdministradorModule, UnidadeMedidaModule, OpcaoModule, AuthModule],
-  controllers: [AppController]
+      entities: ['dist/**/*.entity.js'],
+    }),
+    ProdutoModule,
+    UsuarioModule,
+    CategoriaModule,
+    CompraModule,
+    AdministradorModule,
+    UnidadeMedidaModule,
+    OpcaoModule,
+    AuthModule,
+  ],
+  controllers: [AppController],
 })
-
+// eslint-disable-next-line prettier/prettier
 export class AppModule { }
