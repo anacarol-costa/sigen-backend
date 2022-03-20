@@ -1,3 +1,3 @@
 export const jwtConstants = {
-  secret: process.env.DATABASE_PASSWORD,
+  secret: process.env.SECRET,
 };

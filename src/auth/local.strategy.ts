@@ -10,7 +10,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     super();
   }
   async validar(email: string, senha: string): Promise<any> {
-    const user = await this.authService.validarUsuario(email, senha);
+    const user = await this.authService.obterUsuarioPor(email, senha);
     if (!user) {
       throw new UnauthorizedException('invalid_access_token');
     }

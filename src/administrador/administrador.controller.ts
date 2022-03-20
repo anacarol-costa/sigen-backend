@@ -1,16 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AdministradorService } from './administrador.service';
 import { AdministradorDto } from './dto/administrador.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { Roles } from '../auth/autorizacao/roles.decorator';
+import { Role } from '../auth/autorizacao/Role';
 
-
+@Roles(Role.ADMINISTRADOR) // restringe que apenas usuarios administradores execute os endepoints do controller.
+@UseGuards(JwtAuthGuard) // restringe que usuário tenham um Bearer token no header.
 @ApiTags('Administrador')
 @Controller('administradores')
 export class AdministradorController {
   constructor(private readonly administradorService: AdministradorService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Criar administrador.'})
+  @ApiOperation({ summary: 'Criar administrador.' })
   @ApiResponse({
     status: 201,
     description: 'Administrador criado.',
@@ -20,18 +33,18 @@ export class AdministradorController {
     return this.administradorService.create(createAdministradorDto);
   }
 
-  @ApiOperation({ summary: 'Listar todos os administradores.'})
+  @Get()
+  @ApiOperation({ summary: 'Listar todos os administradores.' })
   @ApiResponse({
     status: 200,
     description: 'Listar administradores.',
     type: [AdministradorDto],
   })
-  @Get()
   findAll() {
     return this.administradorService.findAll();
   }
 
-  @Get(':id')  
+  @Get(':id')
   @ApiOperation({ summary: 'Obter administrador por id.' })
   @ApiResponse({
     status: 200,
@@ -50,13 +63,16 @@ export class AdministradorController {
   @ApiOperation({ summary: 'Alterar administrador.' })
   @ApiResponse({
     status: 204,
-    description: 'Administrador atualizado.'
+    description: 'Administrador atualizado.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Administador não encontrado.'
+    description: 'Administador não encontrado.',
   })
-  update(@Param('id') id: string, @Body() updateAdministradorDto: AdministradorDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateAdministradorDto: AdministradorDto,
+  ) {
     return this.administradorService.update(+id, updateAdministradorDto);
   }
 
@@ -64,11 +80,11 @@ export class AdministradorController {
   @ApiOperation({ summary: 'Deletar administrador.' })
   @ApiResponse({
     status: 204,
-    description: 'Administrador deletado.'
+    description: 'Administrador deletado.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Administrador não encontrado.'
+    description: 'Administrador não encontrado.',
   })
   remove(@Param('id') id: string) {
     return this.administradorService.remove(+id);
