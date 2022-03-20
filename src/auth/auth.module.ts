@@ -3,7 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsuarioModule } from 'src/usuario/usuario.module';
 import { AuthService } from './auth.service';
-// import { jwtConstants } from './constants';
+import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 import { AdministradorModule } from '../administrador/administrador.module';
@@ -16,9 +16,9 @@ import { APP_GUARD } from '@nestjs/core';
     PassportModule,
     AdministradorModule,
     JwtModule.register({
-      // secret: jwtConstants.secret,
-      secretOrPrivateKey: 'teste',
-      secret: 'teste',
+      privateKey: jwtConstants.privateKey,
+      publicKey: jwtConstants.publicKey,
+      secret: jwtConstants.secret,
       signOptions: { expiresIn: '12h' },
     }),
   ],
@@ -33,5 +33,4 @@ import { APP_GUARD } from '@nestjs/core';
   ],
   exports: [AuthService],
 })
-// eslint-disable-next-line prettier/prettier
-export class AuthModule { }
+export class AuthModule {}
