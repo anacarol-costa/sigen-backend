@@ -15,7 +15,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../auth/autorizacao/roles.decorator';
 import { Role } from '../auth/autorizacao/Role';
 
-@Roles(Role.ADMINISTRADOR) // restringe que apenas usuarios administradores execute os endepoints do controller.
+@Roles(Role.ADMINISTRADOR) // restringe que apenas usuarios administradores execute os endpoints do controller.
 @UseGuards(JwtAuthGuard) // restringe que usuário tenham um Bearer token no header.
 @ApiTags('Administrador')
 @Controller('administradores')

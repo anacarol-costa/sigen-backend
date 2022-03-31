@@ -1,5 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Role } from 'src/auth/autorizacao/Role';
+import { Roles } from 'src/auth/autorizacao/roles.decorator';
 import { UsuarioDto } from './dto/usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { UsuarioService } from './usuario.service';
@@ -63,6 +65,7 @@ export class UsuarioController {
   }
 
   @Delete(':id')
+  @Roles(Role.ADMINISTRADOR)
   @ApiOperation({ summary: 'Deletar usuário.' })
   @ApiResponse({
     status: 204,

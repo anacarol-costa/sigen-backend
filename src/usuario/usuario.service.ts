@@ -9,7 +9,8 @@ import { Usuario } from './entities/usuario.entity';
 export class UsuarioService {
 
   constructor(
-    @InjectRepository(Usuario) private readonly usuarioRepository: Repository<Usuario>,
+    @InjectRepository(Usuario)
+    private readonly usuarioRepository: Repository<Usuario>,
     private readonly enderecoService: EnderecoService
   ) {
 
@@ -19,12 +20,6 @@ export class UsuarioService {
     const endereco = await this.obterEntitysAuxiliares(usuarioDto);
 
     const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
-
-    //const email
-
-
-
-
 
     return await this.usuarioRepository.save(usuario);
   }
@@ -40,8 +35,8 @@ export class UsuarioService {
 
   async findByEmail(email: string): Promise<Usuario> {
     return this.usuarioRepository
-      .createQueryBuilder("usuario")
-      .where("usuario.email = :email", { email })
+      .createQueryBuilder('usuario')
+      .where('usuario.email = :email', { email })
       .getOne();
   }
 
@@ -55,6 +50,8 @@ export class UsuarioService {
 
   async remove(id: number): Promise<DeleteResult> {
     return await this.usuarioRepository.delete(id);
+    console.log("aqui");
+    
   }
 
   private async obterEntitysAuxiliares(dto: UsuarioDto) {
