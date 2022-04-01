@@ -64,8 +64,7 @@ export class UsuarioController {
     return this.usuarioService.update(+id, usuarioDto);
   }
 
-  @Delete(':id')
-  @Roles(Role.ADMINISTRADOR)
+  @Delete(':id')  
   @ApiOperation({ summary: 'Deletar usuário.' })
   @ApiResponse({
     status: 204,
@@ -75,6 +74,7 @@ export class UsuarioController {
     status: 404,
     description: 'Usuário não encontrado.'
   })
+  @Roles(Role.ADMINISTRADOR) 
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
   }
