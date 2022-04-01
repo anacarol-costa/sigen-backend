@@ -32,13 +32,7 @@ import { RolesGuard } from './auth/autorizacao/roles.guard';
     OpcaoModule,
     AuthModule,
   ],
-  controllers: [AppController],
-  providers:[
-    {
-      provide: APP_GUARD,
-      useClass:RolesGuard,
-    }
-  ]
+  controllers: [AppController]  
 })
 // eslint-disable-next-line prettier/prettier
 export class AppModule { }

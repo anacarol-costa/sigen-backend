@@ -10,7 +10,6 @@ import { UsuarioService } from './usuario.service';
 
 @ApiTags('Usuário')
 @Controller('usuarios')
-@UseGuards(JwtAuthGuard)
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) { }
 
@@ -75,9 +74,7 @@ export class UsuarioController {
   @ApiResponse({
     status: 404,
     description: 'Usuário não encontrado.'
-  })
-  @Roles(Role.ADMINISTRADOR)
-  @UseGuards(JwtAuthGuard) 
+  })  
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
   }
