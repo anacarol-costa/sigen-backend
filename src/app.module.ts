@@ -1,3 +1,4 @@
+import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ProdutoModule } from './produto/produto.module';
@@ -10,6 +11,7 @@ import { UnidadeMedidaModule } from './unidade-medida/unidade-medida.module';
 import { OpcaoModule } from './opcao/opcao.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { RolesGuard } from './auth/autorizacao/roles.guard';
 
 @Module({
   imports: [
@@ -31,6 +33,12 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
   ],
   controllers: [AppController],
+  providers:[
+    {
+      provide: APP_GUARD,
+      useClass:RolesGuard,
+    }
+  ]
 })
 // eslint-disable-next-line prettier/prettier
 export class AppModule { }
