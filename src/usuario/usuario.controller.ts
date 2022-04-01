@@ -1,8 +1,5 @@
-import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Role } from 'src/auth/autorizacao/Role';
-import { Roles } from 'src/auth/autorizacao/roles.decorator';
 import { UsuarioDto } from './dto/usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { UsuarioService } from './usuario.service';
@@ -74,8 +71,7 @@ export class UsuarioController {
   @ApiResponse({
     status: 404,
     description: 'Usuário não encontrado.'
-  })
-  @Roles(Role.ADMINISTRADOR)  
+  })   
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
   }
