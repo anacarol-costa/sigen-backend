@@ -74,7 +74,8 @@ export class UsuarioController {
   @ApiResponse({
     status: 404,
     description: 'Usuário não encontrado.'
-  })  
+  })
+  @Roles(Role.ADMINISTRADOR)  
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
   }
