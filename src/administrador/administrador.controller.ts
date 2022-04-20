@@ -67,7 +67,7 @@ export class AdministradorController {
   })
   @ApiResponse({
     status: 404,
-    description: 'Administador não encontrado.',
+    description: 'Administrador não encontrado.',
   })
   update(
     @Param('id') id: string,

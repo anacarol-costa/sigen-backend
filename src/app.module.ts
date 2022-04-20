@@ -12,6 +12,7 @@ import { OpcaoModule } from './opcao/opcao.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { RolesGuard } from './auth/autorizacao/roles.guard';
+import { CarrosselModule } from './carrossel/carrossel.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { RolesGuard } from './auth/autorizacao/roles.guard';
     UnidadeMedidaModule,
     OpcaoModule,
     AuthModule,
+    CarrosselModule,
   ],
   controllers: [AppController]  
 })
