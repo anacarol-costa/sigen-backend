@@ -1,18 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Opcao } from "./opcao.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Item {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
+  descricao: string;
 
-    @PrimaryGeneratedColumn()
-    id: Number;
-
-    @Column()
-    descricao: String;
-
-    constructor(id: Number, descricao: String, itensSubOpcoes?: Opcao[]) {
-        this.id = id;
-        this.descricao = descricao;
-    }
-
+  constructor(id: number, descricao: string) {
+    this.id = id;
+    this.descricao = descricao;
+  }
 }

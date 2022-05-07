@@ -36,7 +36,7 @@ import { CardapioModule } from './cardapio/cardapio.module';
     CarrosselModule,
     CardapioModule,
   ],
-  controllers: [AppController]  
+  controllers: [AppController],
 })
 // eslint-disable-next-line prettier/prettier
 export class AppModule { }

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { OpcaoDto } from './dto/opcao.dto';
 import { OpcaoService } from './opcao.service';
@@ -49,11 +57,11 @@ export class OpcaoController {
   @ApiOperation({ summary: 'Alterar opção.' })
   @ApiResponse({
     status: 204,
-    description: 'Opção atualizada.'
+    description: 'Opção atualizada.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Opção não encontrada.'
+    description: 'Opção não encontrada.',
   })
   update(@Param('id') id: string, @Body() updateOpcaoDto: OpcaoDto) {
     return this.opcaoService.update(+id, updateOpcaoDto);
@@ -63,11 +71,11 @@ export class OpcaoController {
   @ApiOperation({ summary: 'Deletar opção.' })
   @ApiResponse({
     status: 204,
-    description: 'Opção deletada.'
+    description: 'Opção deletada.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Opção não encontrada.'
+    description: 'Opção não encontrada.',
   })
   remove(@Param('id') id: string) {
     return this.opcaoService.remove(+id);

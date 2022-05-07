@@ -6,10 +6,10 @@ import { Opcao } from './entities/opcao.entity';
 
 @Injectable()
 export class OpcaoService {
-
-  constructor(@InjectRepository(Opcao) private readonly opcaoRepository: Repository<Opcao>) {
-
-  }
+  constructor(
+    @InjectRepository(Opcao)
+    private readonly opcaoRepository: Repository<Opcao>,
+  ) {}
 
   async create(createOpcaoDto: OpcaoDto): Promise<Opcao> {
     const opcao = OpcaoDto.fromEntity(createOpcaoDto);
