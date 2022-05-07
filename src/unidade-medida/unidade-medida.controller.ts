@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UnidadeMedidaDto } from './dto/unidade-medida.dto';
 import { UnidadeMedidaService } from './unidade-medida.service';
@@ -14,7 +22,7 @@ export class UnidadeMedidaController {
     status: 201,
     description: 'Unidade de medida.',
     type: UnidadeMedidaDto,
-  }) 
+  })
   create(@Body() createUnidadeMedidaDto: UnidadeMedidaDto) {
     return this.unidadeMedidaService.create(createUnidadeMedidaDto);
   }
@@ -49,13 +57,16 @@ export class UnidadeMedidaController {
   @ApiOperation({ summary: 'Alterar unidade de medida.' })
   @ApiResponse({
     status: 204,
-    description: 'Unidade de medida atualizada.'
+    description: 'Unidade de medida atualizada.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Unidade de medida não encontrada.'
+    description: 'Unidade de medida não encontrada.',
   })
-  update(@Param('id') id: string, @Body() updateUnidadeMedidaDto: UnidadeMedidaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateUnidadeMedidaDto: UnidadeMedidaDto,
+  ) {
     return this.unidadeMedidaService.update(+id, updateUnidadeMedidaDto);
   }
 
@@ -63,11 +74,11 @@ export class UnidadeMedidaController {
   @ApiOperation({ summary: 'Deletar unidade de medida.' })
   @ApiResponse({
     status: 204,
-    description: 'Unidade de medida deletada.'
+    description: 'Unidade de medida deletada.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Unidade de medida não encontrada.'
+    description: 'Unidade de medida não encontrada.',
   })
   remove(@Param('id') id: string) {
     return this.unidadeMedidaService.remove(+id);
