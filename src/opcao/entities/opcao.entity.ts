@@ -1,21 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Opcao {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: Number;
+  @Column()
+  nome: string;
 
-    @Column()
-    nome: String;
-    
-    @Column()
-    valor: Number;
+  @Column()
+  valor: number;
 
-    constructor(id: Number, nome: String, valor: Number) {
-        this.id = id;
-        this.nome = nome;
-        this.valor = valor;
-    }
-
+  constructor(id: number, nome: string, valor: number) {
+    this.id = id;
+    this.nome = nome;
+    this.valor = valor;
+  }
 }
