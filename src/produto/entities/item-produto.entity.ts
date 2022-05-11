@@ -7,17 +7,17 @@ export class ItemProduto {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Produto, (produto) => produto.itensProduto)
+  @ManyToOne(() => Produto, (produto) => produto.itensProduto, { eager: true })
   @JoinColumn({ name: 'id_produto' })
   produto: Produto;
 
-  @ManyToOne(() => ItemOpcao, (itemOpcao) => itemOpcao.id)
+  @ManyToOne(() => ItemOpcao, (itemOpcao) => itemOpcao.id, { eager: true })
   @JoinColumn({ name: 'id_item_sub_opcao' })
-  ItemOpcao: ItemOpcao;
+  itemOpcao: ItemOpcao;
 
-  constructor(id: number, produto: Produto, ItemOpcao: ItemOpcao) {
+  constructor(id: number, produto: Produto, itemOpcao: ItemOpcao) {
     this.id = id;
     this.produto = produto;
-    this.ItemOpcao = ItemOpcao;
+    this.itemOpcao = itemOpcao;
   }
 }

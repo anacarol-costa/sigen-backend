@@ -88,4 +88,18 @@ export class ProdutoService {
 
     return { categoria, unidadeMedida };
   }
+
+  async obterProdutoAgrupadosPorCategoria() {
+    const produtos = await this.produtoRepository.find();
+    const result = {};
+
+    produtos.forEach((produto) => {
+      const categoria = produto.categoria.nome;
+      const itemAtual = result[categoria];
+      result[categoria] = !itemAtual ? [produto] : [...itemAtual, produto];
+    });
+
+    return result;
+  }
+
 }
