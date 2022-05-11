@@ -34,7 +34,6 @@ export class ItemOpcaoService {
   }
 
   async findAll(): Promise<ItemOpcao[]> {
-    const itemOpcaos = await this.itemOpcaoRepository.find();
-    return itemOpcaos;
+    return this.itemOpcaoRepository.find();
   }
 }

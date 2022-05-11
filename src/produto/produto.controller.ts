@@ -1,8 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ProdutoService } from './produto.service';
 import { ProdutoDto } from './dto/produto.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-
 
 @ApiTags('Produto')
 @Controller('produtos')
@@ -50,11 +57,11 @@ export class ProdutoController {
   @ApiOperation({ summary: 'Alterar produto.' })
   @ApiResponse({
     status: 204,
-    description: 'Produto atualizado.'
+    description: 'Produto atualizado.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Produto não encontrado.'
+    description: 'Produto não encontrado.',
   })
   update(@Param('id') id: string, @Body() updateProdutoDto: ProdutoDto) {
     return this.produtoService.update(+id, updateProdutoDto);
@@ -64,11 +71,11 @@ export class ProdutoController {
   @ApiOperation({ summary: 'Deletar produto.' })
   @ApiResponse({
     status: 204,
-    description: 'Produto deletado.'
+    description: 'Produto deletado.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Produto não encontrado.'
+    description: 'Produto não encontrado.',
   })
   remove(@Param('id') id: string) {
     return this.produtoService.remove(+id);

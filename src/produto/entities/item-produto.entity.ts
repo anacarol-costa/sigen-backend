@@ -11,7 +11,13 @@ export class ItemProduto {
   @JoinColumn({ name: 'id_produto' })
   produto: Produto;
 
-  @ManyToOne(() => ItemOpcao, (ItemOpcao) => ItemOpcao.id)
+  @ManyToOne(() => ItemOpcao, (itemOpcao) => itemOpcao.id)
   @JoinColumn({ name: 'id_item_sub_opcao' })
   ItemOpcao: ItemOpcao;
+
+  constructor(id: number, produto: Produto, ItemOpcao: ItemOpcao) {
+    this.id = id;
+    this.produto = produto;
+    this.ItemOpcao = ItemOpcao;
+  }
 }

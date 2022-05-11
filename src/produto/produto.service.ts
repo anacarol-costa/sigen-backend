@@ -5,12 +5,18 @@ import { UnidadeMedidaService } from 'src/unidade-medida/unidade-medida.service'
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ProdutoDto } from './dto/produto.dto';
 import { Produto } from './entities/produto.entity';
+import { ItemProduto } from './entities/item-produto.entity';
+import { ItemOpcao } from '../opcao/entities/item-opcao.entity';
 
 @Injectable()
 export class ProdutoService {
   constructor(
     @InjectRepository(Produto)
     private readonly produtoRepository: Repository<Produto>,
+    @InjectRepository(ItemProduto)
+    private readonly itemProdutoRepository: Repository<ItemProduto>,
+    @InjectRepository(ItemOpcao)
+    private readonly itemOpcaoRepository: Repository<ItemOpcao>,
     private readonly categoriaService: CategoriaService,
     private readonly unidadeMedidaService: UnidadeMedidaService,
   ) {}
@@ -22,19 +28,40 @@ export class ProdutoService {
 
     const produto = ProdutoDto.fromEntity(produtoDto, categoria, unidadeMedida);
 
-    return await this.produtoRepository.save(produto);
+    const novoProduto = await this.produtoRepository.save(produto);
+
+    await this.salvarItensProduto(produtoDto, novoProduto);
+
+    return novoProduto;
+  }
+
+  private async salvarItensProduto(
+    produtoDto: ProdutoDto,
+    novoProduto: Produto,
+  ) {
+    if (produtoDto.itensOpcao !== null && produtoDto.itensOpcao.length > 0) {
+      const itensOpcao = await this.itemOpcaoRepository.findByIds(
+        produtoDto.itensOpcao,
+      );
+
+      const itensProduto = itensOpcao.map(
+        (item) => new ItemProduto(null, novoProduto, item),
+      );
+
+      return this.itemProdutoRepository.save(itensProduto);
+    }
   }
 
   async findAll(): Promise<Produto[]> {
-    return await this.produtoRepository.find();
+    return this.produtoRepository.find();
   }
 
   async findOne(id: number): Promise<Produto> {
-    return await this.produtoRepository.findOne(id);
+    return this.produtoRepository.findOne(id);
   }
 
   async findByIds(ids: number[]): Promise<Produto[]> {
-    return await this.produtoRepository.findByIds(ids);
+    return this.produtoRepository.findByIds(ids);
   }
 
   async update(id: number, produtoDto: ProdutoDto): Promise<UpdateResult> {
@@ -44,11 +71,11 @@ export class ProdutoService {
 
     const produto = ProdutoDto.fromEntity(produtoDto, categoria, unidadeMedida);
 
-    return await this.produtoRepository.update(id, produto);
+    return this.produtoRepository.update(id, produto);
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.produtoRepository.delete(id);
+    return this.produtoRepository.delete(id);
   }
 
   private async obterEntitysAuxiliares(createProdutoDto: ProdutoDto) {

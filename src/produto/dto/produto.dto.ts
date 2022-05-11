@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Categoria } from 'src/categoria/entities/categoria.entity';
 import { UnidadeMedida } from 'src/unidade-medida/entities/unidade-medida.entity';
 import { Produto } from '../entities/produto.entity';
-import { ItemProdutoDto } from './item-produto.dto';
+import { ItemProduto } from '../entities/item-produto.entity';
 
 export class ProdutoDto {
   @ApiProperty()
@@ -20,13 +20,17 @@ export class ProdutoDto {
   @ApiProperty()
   unidadeMedida: number;
 
-  @ApiProperty({ type: [ItemProdutoDto] })
-  itensProduto: Array<ItemProdutoDto>;
+  @ApiProperty()
+  itensProduto: number[];
+
+  @ApiProperty()
+  itensOpcao: number[];
 
   static fromEntity(
     dto: ProdutoDto,
     categoria: Categoria,
     unidadeMedida: UnidadeMedida,
+    itensProduto?: ItemProduto[],
   ): Produto {
     return new Produto(
       dto.id,
@@ -34,6 +38,7 @@ export class ProdutoDto {
       dto.valorBase,
       categoria,
       unidadeMedida,
+      itensProduto,
     );
   }
 }
