@@ -24,7 +24,10 @@ export class CardapioService {
     return await this.cardapioRepository.findOne(id);
   }
 
-  async update(id: number, updateCardapioDto: CardapioDto): Promise<UpdateResult> {
+  async update(
+    id: number,
+    updateCardapioDto: CardapioDto,
+  ): Promise<UpdateResult> {
     const cardapio = CardapioDto.fromEntity(updateCardapioDto);
     return await this.cardapioRepository.update(id, cardapio);
   }

@@ -1,17 +1,14 @@
 import { Cardapio } from './../entities/cardapio.entity';
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CardapioDto {
-    @ApiProperty()
-    id: number;
+  @ApiProperty()
+  id: number;
 
-    @ApiProperty()
-    pdf: string;
+  @ApiProperty()
+  nome: string;
 
-    static fromEntity(dto: CardapioDto): Cardapio {
-        return new Cardapio(
-            dto.id,
-            dto.pdf
-        )
-    }
+  static fromEntity(dto: CardapioDto): Cardapio {
+    return new Cardapio(dto.id, dto.nome);
+  }
 }

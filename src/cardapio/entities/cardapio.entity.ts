@@ -1,18 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Cardapio {
-    @PrimaryGeneratedColumn({name: 'id_cardapio'})
-    id: number;
+  @PrimaryGeneratedColumn({ name: 'id_cardapio' })
+  id: number;
 
-    @Column()
-    pdf: string;
+  @Column()
+  nome: string;
 
-    constructor(
-        id: number,
-        pdf: string,
-    ){
-        this.id = id;
-        this.pdf = pdf;
-    }
+  @Column({ type: 'blob' })
+  pdf: number[];
+
+  constructor(id: number, nome: string) {
+    this.id = id;
+    this.nome = nome;
+  }
 }
