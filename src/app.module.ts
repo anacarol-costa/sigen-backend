@@ -14,6 +14,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RolesGuard } from './auth/autorizacao/roles.guard';
 import { CarrosselModule } from './carrossel/carrossel.module';
 import { CardapioModule } from './cardapio/cardapio.module';
+import { ContatoModule } from './contato/contato.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { CardapioModule } from './cardapio/cardapio.module';
     AuthModule,
     CarrosselModule,
     CardapioModule,
+    ContatoModule,
   ],
   controllers: [AppController],
 })
