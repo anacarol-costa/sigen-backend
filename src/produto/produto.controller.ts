@@ -80,4 +80,15 @@ export class ProdutoController {
   remove(@Param('id') id: string) {
     return this.produtoService.remove(+id);
   }
+
+  @Get('/categoria/:id')
+  @ApiOperation({ summary: 'Obter produtos por id categoria.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Produtos encontrados.',
+    type: ProdutoDto,
+  })
+  obterProdutosPorCategoria(@Param('id') id: string) {
+    return this.produtoService.obterProdutosPorCategoria(+id);
+  }
 }

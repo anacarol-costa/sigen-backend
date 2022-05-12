@@ -7,31 +7,27 @@ import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuarioService {
-
   constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>,
-    private readonly enderecoService: EnderecoService
-  ) {
-
-  }
+    private readonly enderecoService: EnderecoService,
+  ) {}
 
   async create(usuarioDto: UsuarioDto): Promise<Usuario> {
     const endereco = await this.obterEntitysAuxiliares(usuarioDto);
 
     const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
 
-    return await this.usuarioRepository.save(usuario);
+    return this.usuarioRepository.save(usuario);
   }
 
   async findAll(): Promise<Usuario[]> {
-    return await this.usuarioRepository.find();
+    return this.usuarioRepository.find();
   }
 
   async findOne(id: number) {
-    return await this.usuarioRepository.findOne(id);
+    return this.usuarioRepository.findOne(id);
   }
-
 
   async findByEmail(email: string): Promise<Usuario> {
     return this.usuarioRepository
@@ -45,18 +41,16 @@ export class UsuarioService {
 
     const usuario = UsuarioDto.fromEntity(usuarioDto, endereco);
 
-    return await this.usuarioRepository.update(id, usuario);
+    return this.usuarioRepository.update(id, usuario);
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.usuarioRepository.delete(id);
-    console.log("aqui");
-    
+    return this.usuarioRepository.delete(id);
+    console.log('aqui');
   }
 
   private async obterEntitysAuxiliares(dto: UsuarioDto) {
     const endereco = await this.enderecoService.findOne(dto.enderecoIds);
-
 
     return endereco;
   }

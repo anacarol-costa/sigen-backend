@@ -102,4 +102,10 @@ export class ProdutoService {
     return result;
   }
 
+  obterProdutosPorCategoria(categoriaId: number) {
+    return this.produtoRepository
+      .createQueryBuilder('produto')
+      .where('produto.categoria.id = :categoriaId', { categoriaId })
+      .getMany();
+  }
 }
