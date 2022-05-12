@@ -105,6 +105,10 @@ export class ProdutoService {
   obterProdutosPorCategoria(categoriaId: number) {
     return this.produtoRepository
       .createQueryBuilder('produto')
+      .innerJoinAndSelect('produto.itensProduto', 'itensProduto')
+      .innerJoinAndSelect('itensProduto.itemOpcao', 'itemOpcao')
+      .innerJoinAndSelect('itemOpcao.item', 'item')
+      .innerJoinAndSelect('itemOpcao.opcao', 'opcao')
       .where('produto.categoria.id = :categoriaId', { categoriaId })
       .getMany();
   }
