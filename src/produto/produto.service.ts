@@ -90,7 +90,11 @@ export class ProdutoService {
   }
 
   async obterProdutoAgrupadosPorCategoria() {
-    const produtos = await this.produtoRepository.find();
+    const produtos = await this.produtoRepository
+      .createQueryBuilder('produto')
+      .innerJoinAndSelect('produto.itensProduto', 'itensProduto')
+      .getMany();
+
     const result = {};
 
     produtos.forEach((produto) => {
