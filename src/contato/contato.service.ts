@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { CreateContatoDto } from './dto/create-contato.dto';
-import { UpdateContatoDto } from './dto/update-contato.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { ContatoDto } from './dto/contato.dto';
+import { Contato } from './entities/contato.entity';
+
 
 @Injectable()
 export class ContatoService {
-  create(createContatoDto: CreateContatoDto) {
-    return 'This action adds a new contato';
+  constructor(
+    @InjectRepository(Contato)
+    private readonly contatoRepository: Repository<Contato>,
+  ) { }
+
+ async create(createContatoDto: ContatoDto): Promise<Contato> {
+    const contato = ContatoDto.fromEntity(createContatoDto);
+    return await this.contatoRepository.save(contato);
   }
 
-  findAll() {
-    return `This action returns all contato`;
+  async findAll(): Promise<Contato[]> {
+    return await this.contatoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} contato`;
+  async findOne(id: number): Promise<Contato> {
+    return await this.contatoRepository.findOne(id);
   }
 
-  update(id: number, updateContatoDto: UpdateContatoDto) {
-    return `This action updates a #${id} contato`;
+ async update(id: number, updateContatoDto: ContatoDto): Promise<UpdateResult> {
+   const contato = ContatoDto.fromEntity(updateContatoDto);
+    return await this.contatoRepository.update(id, contato);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} contato`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.contatoRepository.delete(id);
   }
 }
