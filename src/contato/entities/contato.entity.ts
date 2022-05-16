@@ -11,8 +11,8 @@ export class Contato {
     @Column()
     email: string;
 
-    @Column()
-    whatsapp: string;
+    @Column({nullable: true})
+    whatsapp!: string;
 
     @Column()
     horario: string;
