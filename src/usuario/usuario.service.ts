@@ -4,6 +4,8 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { UsuarioDto } from './dto/usuario.dto';
 import { EnderecoService } from './endereco.service';
 import { Usuario } from './entities/usuario.entity';
+import { CriarEnderecoUsuarioDto } from './dto/criar-enderedo-usuario.dto';
+import { EnderecoDto } from './dto/endereco.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -46,12 +48,19 @@ export class UsuarioService {
 
   async remove(id: number): Promise<DeleteResult> {
     return this.usuarioRepository.delete(id);
-    console.log('aqui');
+  }
+
+  async criarEnderecoUsuario(dto: CriarEnderecoUsuarioDto) {
+    const usuario = await this.findOne(dto.usuario);
+    const novoEndereco = await this.enderecoService.create(dto.endereco);
+
+    usuario.enderecos = novoEndereco;
+    this.usuarioRepository.save(usuario);
+
+    return novoEndereco;
   }
 
   private async obterEntitysAuxiliares(dto: UsuarioDto) {
-    const endereco = await this.enderecoService.findOne(dto.enderecoIds);
-
-    return endereco;
+    return this.enderecoService.findOne(dto.enderecoIds);
   }
 }

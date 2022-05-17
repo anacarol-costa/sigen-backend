@@ -1,29 +1,25 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Endereco } from "../entities/endereco.entity";
-import { Usuario } from "../entities/usuario.entity";
-import { EnderecoDto } from "./endereco.dto";
-
+import { ApiProperty } from '@nestjs/swagger';
+import { Endereco } from '../entities/endereco.entity';
+import { Usuario } from '../entities/usuario.entity';
 
 export class UsuarioDto {
-  
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @ApiProperty()
   nome: string;
 
   @ApiProperty()
-  email: String; 
+  email: string;
 
   @ApiProperty()
-  senha: String; 
+  senha: string;
 
   @ApiProperty()
   enderecoIds: number; //EnderecoDto[]
 
   @ApiProperty()
-  telefone: String;
-
+  telefone: string;
 
   static fromEntity(dto: UsuarioDto, endereco: Endereco): Usuario {
     return new Usuario(
@@ -32,7 +28,7 @@ export class UsuarioDto {
       dto.email,
       dto.senha,
       endereco,
-      dto.telefone
-    )
+      dto.telefone,
+    );
   }
 }

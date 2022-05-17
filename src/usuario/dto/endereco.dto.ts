@@ -1,15 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Endereco } from "../entities/endereco.entity";
-
-
-
+import { ApiProperty } from '@nestjs/swagger';
+import { Endereco } from '../entities/endereco.entity';
 
 export class EnderecoDto {
   @ApiProperty()
   id: number;
 
   @ApiProperty()
-  cep: number;
+  cep: string;
 
   @ApiProperty()
   bairro: string;
@@ -21,7 +18,7 @@ export class EnderecoDto {
   pontoReferencia: string;
 
   @ApiProperty()
-  quadra: number;
+  quadra: string;
 
   static fromEntity(dto: EnderecoDto): Endereco {
     return new Endereco(
@@ -31,7 +28,6 @@ export class EnderecoDto {
       dto.complemento,
       dto.pontoReferencia,
       dto.quadra,
-    )
+    );
   }
 }
-
