@@ -54,10 +54,20 @@ export class UsuarioService {
     const usuario = await this.findOne(dto.usuario);
     const novoEndereco = await this.enderecoService.create(dto.endereco);
 
-    usuario.enderecos = novoEndereco;
+    usuario.endereco = novoEndereco;
     this.usuarioRepository.save(usuario);
 
     return novoEndereco;
+  }
+
+  async obterEnderecoUsuario(usuarioId: number) {
+    const usuario = await this.usuarioRepository
+      .createQueryBuilder('usuario')
+      .innerJoinAndSelect('usuario.endereco', 'endereco')
+      .where('usuario.id = :usuarioId', { usuarioId })
+      .getOne();
+
+    return usuario.endereco;
   }
 
   private async obterEntitysAuxiliares(dto: UsuarioDto) {

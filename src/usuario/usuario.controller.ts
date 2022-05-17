@@ -103,4 +103,20 @@ export class UsuarioController {
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
   }
+
+  @Get(':id/endereco')
+  @ApiOperation({ summary: 'Obter endereço usuário por id.' })
+  @ApiResponse({
+    status: 200,
+    description: 'endereço encontrado.',
+    type: UsuarioDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Endereço não encontrado.',
+  })
+  @Get(':id')
+  obterEnderecoUsuario(@Param('id') id: string) {
+    return this.usuarioService.obterEnderecoUsuario(+id);
+  }
 }

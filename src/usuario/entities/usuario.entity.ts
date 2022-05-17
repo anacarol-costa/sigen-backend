@@ -25,7 +25,7 @@ export class Usuario {
 
   @ManyToOne(() => Endereco, (endereco) => endereco.id, { eager: true })
   @JoinColumn({ name: 'id_endereco' })
-  enderecos: Endereco;
+  endereco: Endereco;
 
   @Column()
   telefone: string;
@@ -42,7 +42,7 @@ export class Usuario {
     this.nome = nome;
     this.email = email;
     this.senha = senha;
-    this.enderecos = endereco;
+    this.endereco = endereco;
     this.telefone = telefone;
   }
 }
