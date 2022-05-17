@@ -7,7 +7,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
-  OneToMany,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -20,14 +20,14 @@ export class Compra {
   @Column()
   valorCompra: number;
 
-  @OneToOne(() => Endereco, (endereco) => endereco.id, {
+  @ManyToOne(() => Endereco, (endereco) => endereco.id, {
     eager: true,
     nullable: true,
   })
   @JoinColumn({ name: 'id_endereco_compra' })
-  enderecoCompra!: Endereco;
+  enderecoCompra: Endereco;
 
-  @OneToOne(() => Usuario, (usuario) => usuario.id, { eager: true })
+  @ManyToOne(() => Usuario, (usuario) => usuario.id, { eager: true })
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
