@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CompraService } from './compra.service';
 import { CompraDto } from './dto/compra.dto';
@@ -49,11 +57,11 @@ export class CompraController {
   @ApiOperation({ summary: 'Alterar compra.' })
   @ApiResponse({
     status: 204,
-    description: 'Compra atualizada.'
+    description: 'Compra atualizada.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Compra não encontrada.'
+    description: 'Compra não encontrada.',
   })
   update(@Param('id') id: string, @Body() updateCompraDto: CompraDto) {
     return this.compraService.update(+id, updateCompraDto);
@@ -63,11 +71,11 @@ export class CompraController {
   @ApiOperation({ summary: 'Deletar compra.' })
   @ApiResponse({
     status: 204,
-    description: 'Compra deletada.'
+    description: 'Compra deletada.',
   })
   @ApiResponse({
     status: 404,
-    description: 'Compra não encontrada.'
+    description: 'Compra não encontrada.',
   })
   remove(@Param('id') id: string) {
     return this.compraService.remove(+id);
