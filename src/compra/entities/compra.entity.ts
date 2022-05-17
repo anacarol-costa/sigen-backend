@@ -31,7 +31,7 @@ export class Compra {
   @JoinColumn({ name: 'id_usuario' })
   usuario: Usuario;
 
-  @ManyToMany(() => Produto, { eager: true })
+  @ManyToMany(() => Produto)
   @JoinTable({ name: 'compra_produto' })
   produtos: Produto[];
 

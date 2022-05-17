@@ -28,15 +28,23 @@ export class CompraService {
       produtos,
     );
 
-    return await this.compraRepository.save(compra);
+    return this.compraRepository.save(compra);
   }
 
   async findAll(): Promise<Compra[]> {
-    return await this.compraRepository.find();
+    return this.compraRepository.find();
   }
 
   async findOne(id: number): Promise<Compra> {
-    return await this.compraRepository.findOne(id);
+    return this.compraRepository
+      .createQueryBuilder('compra')
+      .innerJoinAndSelect('compra.produtos', 'produtos')
+      .innerJoinAndSelect('produtos.itensProduto', 'itensProduto')
+      .innerJoinAndSelect('itensProduto.itemOpcao', 'itemOpcao')
+      .innerJoinAndSelect('itemOpcao.opcao', 'opcao')
+      .innerJoinAndSelect('itemOpcao.item', 'item')
+      .where('compra.id = :id', { id })
+      .getOne();
   }
 
   async update(id: number, compraDto: CompraDto): Promise<Compra> {
@@ -49,11 +57,11 @@ export class CompraService {
     compra.enderecoCompra = enderecoCompra;
     compra.valorCompra = compraDto.valorCompra;
 
-    return await this.compraRepository.save(compra);
+    return this.compraRepository.save(compra);
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return await this.compraRepository.delete(id);
+    return this.compraRepository.delete(id);
   }
 
   private async obterEntitysAuxiliares(dto: CompraDto) {
