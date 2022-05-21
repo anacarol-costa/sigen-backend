@@ -20,6 +20,18 @@ export class CompraDto {
   @ApiProperty()
   produtosId: number[];
 
+  @ApiProperty()
+  dia: string;
+
+  @ApiProperty()
+  mes: number;
+
+  @ApiProperty()
+  ano: string;
+
+  @ApiProperty()
+  hora: string;
+
   static fromEntity(
     dto: CompraDto,
     enderecoCompra: Endereco,
@@ -32,6 +44,10 @@ export class CompraDto {
       enderecoCompra,
       usuario,
       produtos,
+      dto.dia,
+      dto.mes,
+      dto.ano,
+      dto.hora,
     );
   }
 }

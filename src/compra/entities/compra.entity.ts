@@ -35,17 +35,37 @@ export class Compra {
   @JoinTable({ name: 'compra_produto' })
   produtos: Produto[];
 
+  @Column({ nullable: true })
+  dia!: string;
+
+  @Column({ nullable: true })
+  mes!: number;
+
+  @Column({ nullable: true })
+  ano!: string;
+
+  @Column({ nullable: true })
+  hora!: string;
+
   constructor(
     id: number,
     valorCompra: number,
     enderecoCompra: Endereco,
     usuario: Usuario,
     produtos: Produto[],
+    dia: string,
+    mes: number,
+    ano: string,
+    hora: string,
   ) {
     this.id = id;
     this.valorCompra = valorCompra;
     this.enderecoCompra = enderecoCompra;
     this.usuario = usuario;
     this.produtos = produtos;
+    this.dia = dia;
+    this.mes = mes;
+    this.ano = ano;
+    this.hora = hora;
   }
 }
