@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CompraService } from './compra.service';
@@ -67,6 +68,24 @@ export class CompraController {
     return this.compraService.update(+id, updateCompraDto);
   }
 
+  @Get('periodo')
+  @ApiOperation({ summary: 'Obter compra por período.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Compra obtida por período encontrada.',
+    type: CompraDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Compra obtida por período não encontrada.',
+  })
+  obterComprasPeriodo(@Query('dia') dia: string, @Query('mes') mes: string, @Query('ano') ano: string) {
+    console.log('dia', dia);
+    console.log('mes', mes);
+    console.log('dia', dia);
+    return this.compraService.obterComprasPeriodo(dia, +mes, ano);
+  }
+  
   @Delete(':id')
   @ApiOperation({ summary: 'Deletar compra.' })
   @ApiResponse({

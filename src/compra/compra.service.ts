@@ -15,7 +15,7 @@ export class CompraService {
     private readonly usuarioService: UsuarioService,
     private readonly produtoService: ProdutoService,
     private readonly enderecoService: EnderecoService,
-  ) {}
+  ) { }
 
   async create(compraDto: CompraDto): Promise<Compra> {
     const { enderecoCompra, usuario, produtos } =
@@ -72,5 +72,15 @@ export class CompraService {
     const produtos = await this.produtoService.findByIds(dto.produtosId);
 
     return { enderecoCompra, usuario, produtos };
+  }
+
+  async obterComprasPeriodo(dia: string, mes: number, ano: string): Promise<Compra[]> {
+    const result =  this.compraRepository.createQueryBuilder("compra")
+      .where("compra.dia = :dia", { dia })
+      .andWhere("compra.mes = :mes", { mes })
+      .andWhere("compra.ano = :ano", { ano })
+      .getMany();
+
+      return result;
   }
 }
