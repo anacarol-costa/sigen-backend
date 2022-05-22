@@ -15,7 +15,7 @@ export class CompraService {
     private readonly usuarioService: UsuarioService,
     private readonly produtoService: ProdutoService,
     private readonly enderecoService: EnderecoService,
-  ) { }
+  ) {}
 
   async create(compraDto: CompraDto): Promise<Compra> {
     const { enderecoCompra, usuario, produtos } =
@@ -32,7 +32,14 @@ export class CompraService {
   }
 
   async findAll(): Promise<Compra[]> {
-    return this.compraRepository.find();
+    return this.compraRepository
+      .createQueryBuilder('compra')
+      .innerJoinAndSelect('compra.produtos', 'produtos')
+      .innerJoinAndSelect('produtos.itensProduto', 'itensProduto')
+      .innerJoinAndSelect('itensProduto.itemOpcao', 'itemOpcao')
+      .innerJoinAndSelect('itemOpcao.opcao', 'opcao')
+      .innerJoinAndSelect('itemOpcao.item', 'item')
+      .getMany();
   }
 
   async findOne(id: number): Promise<Compra> {
@@ -74,13 +81,18 @@ export class CompraService {
     return { enderecoCompra, usuario, produtos };
   }
 
-  async obterComprasPeriodo(dia: string, mes: number, ano: string): Promise<Compra[]> {
-    const result =  this.compraRepository.createQueryBuilder("compra")
-      .where("compra.dia = :dia", { dia })
-      .andWhere("compra.mes = :mes", { mes })
-      .andWhere("compra.ano = :ano", { ano })
+  async obterComprasPeriodo(
+    dia: string,
+    mes: number,
+    ano: string,
+  ): Promise<Compra[]> {
+    const result = this.compraRepository
+      .createQueryBuilder('compra')
+      .where('compra.dia = :dia', { dia })
+      .andWhere('compra.mes = :mes', { mes })
+      .andWhere('compra.ano = :ano', { ano })
       .getMany();
 
-      return result;
+    return result;
   }
 }
