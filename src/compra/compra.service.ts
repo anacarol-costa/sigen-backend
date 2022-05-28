@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProdutoService } from 'src/produto/produto.service';
 import { EnderecoService } from 'src/usuario/endereco.service';
 import { UsuarioService } from 'src/usuario/usuario.service';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { CompraDto } from './dto/compra.dto';
 import { Compra } from './entities/compra.entity';
 
@@ -86,13 +86,11 @@ export class CompraService {
     mes: number,
     ano: string,
   ): Promise<Compra[]> {
-    const result = this.compraRepository
+    return this.compraRepository
       .createQueryBuilder('compra')
       .where('compra.dia = :dia', { dia })
       .andWhere('compra.mes = :mes', { mes })
       .andWhere('compra.ano = :ano', { ano })
       .getMany();
-
-    return result;
   }
 }

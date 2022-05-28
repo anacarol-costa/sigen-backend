@@ -71,6 +71,8 @@ export class UsuarioService {
   }
 
   private async obterEntitysAuxiliares(dto: UsuarioDto) {
-    return this.enderecoService.findOne(dto.enderecoIds);
+    return dto.enderecoIds
+      ? this.enderecoService.findOne(dto.enderecoIds)
+      : null;
   }
 }
