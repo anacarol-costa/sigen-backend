@@ -19,7 +19,7 @@ export class ProdutoService {
     private readonly itemOpcaoRepository: Repository<ItemOpcao>,
     private readonly categoriaService: CategoriaService,
     private readonly unidadeMedidaService: UnidadeMedidaService,
-  ) {}
+  ) { }
 
   async create(produtoDto: ProdutoDto): Promise<Produto> {
     const { categoria, unidadeMedida } = await this.obterEntitysAuxiliares(
@@ -53,7 +53,11 @@ export class ProdutoService {
   }
 
   async findAll(): Promise<Produto[]> {
-    return this.produtoRepository.find();
+    return this.produtoRepository.createQueryBuilder("produto")
+      .innerJoinAndSelect("produto.itensProduto", "itensProduto")
+      .innerJoinAndSelect("itensProduto.itemOpcao", "itensOpcao" )
+      .innerJoinAndSelect("itensOpcao.opcao", "opcao")
+      .getMany();
   }
 
   async findOne(id: number): Promise<Produto> {
