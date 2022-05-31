@@ -36,6 +36,9 @@ export class Produto {
   })
   itensProduto: ItemProduto[];
 
+  @Column({ nullable: true })
+  ativo!: number;
+
   constructor(
     id: number,
     nome: string,
@@ -50,5 +53,15 @@ export class Produto {
     this.categoria = categoria;
     this.unidadeMedida = unidadeMedida;
     this.itensProduto = itensProduto;
+    this.ativo = Produto.ativar();
   }
+
+  static ativar(): number {
+    return 1;
+  }
+
+  static inativar(): number {
+    return 0;
+  }
+
 }

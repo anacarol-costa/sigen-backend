@@ -55,7 +55,7 @@ export class ProdutoService {
   async findAll(): Promise<Produto[]> {
     return this.produtoRepository.createQueryBuilder("produto")
       .innerJoinAndSelect("produto.itensProduto", "itensProduto")
-      .innerJoinAndSelect("itensProduto.itemOpcao", "itensOpcao" )
+      .innerJoinAndSelect("itensProduto.itemOpcao", "itensOpcao")
       .innerJoinAndSelect("itensOpcao.opcao", "opcao")
       .getMany();
   }
@@ -78,8 +78,10 @@ export class ProdutoService {
     return this.produtoRepository.update(id, produto);
   }
 
-  async remove(id: number): Promise<DeleteResult> {
-    return this.produtoRepository.delete(id);
+  async remove(id: number) {
+    const produto = await this.findOne(id);
+    produto.ativo = Produto.inativar();
+    this.produtoRepository.save(produto);
   }
 
   private async obterEntitysAuxiliares(createProdutoDto: ProdutoDto) {
